@@ -4,7 +4,7 @@
   "description": "Mobile info open-source api",
   "main": "index.js",
   "scripts": {
-    "start-mon": "nodemon app.js",
+    "start": "nodemon app.js",
     "start-node": "node app.js"
   },
   "keywords": [],
