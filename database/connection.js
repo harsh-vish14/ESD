@@ -4,7 +4,7 @@ dotenv.config();
 const mongoose = require("mongoose");
 
 mongoose
-  .connect(process.env.MONGO_DB_URL_DEVELOPMENT, {
+  .connect(process.env.MONGO_DB_URL_PRODUCTION, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

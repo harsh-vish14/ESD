@@ -1,11 +1,14 @@
 const dotenv = require("dotenv");
-dotenv.config();
 require("./database/connection");
 const Mobile = require("./database/models/mobile");
 const express = require("express");
-const app = express();
+var cors = require("cors");
 const PORT = process.env.PORT || 8000;
+
+dotenv.config();
+const app = express();
 app.use(express.json());
+app.use(cors());
 
 // this is get request method
 app.get("/mobile", async (req, res) => {
@@ -25,7 +28,7 @@ app
     // the information of mobile with name
 
     const name = req.params.name.split("-").join(" ");
-    const mobileData = await Mobile.find({ name: name }, { _id: 0 });
+    const mobileData = await Mobile.find({ name: name }, { _id: 0, __v: 0 });
     if (!mobileData.length) {
       return res.status(404).json({ error: `${name} mobile data not found` });
     }
@@ -78,7 +81,7 @@ app
         return res.status(404).json({ error: `${name} not found` });
       }
       await Mobile.updateOne(
-        { mobileName: name },
+        { name: name },
         {
           $set: req.body,
         }
@@ -97,7 +100,7 @@ app
     // deleting information of mobile with name
     if (req.headers.authorization === process.env.AUTH_ID) {
       const name = req.params.name.split("-").join(" ");
-      const mobile = await Mobile.find({ nam: name });
+      const mobile = await Mobile.find({ name: name });
       if (!mobile.length) {
         return res.status(404).json({ error: `${name} not found` });
       }

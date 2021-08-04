@@ -8,6 +8,6 @@ const MobileModel = {
   storage: Number,
   processor: String,
   camera: Number,
-  size: Number,
+  size: String,
 };
 module.exports = mongoose.model("mobile", MobileModel);
